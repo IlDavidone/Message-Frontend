@@ -11,7 +11,7 @@ export const authenticationStates = create((set, get) => ({
 
     authenticationCheck: async () => {
         try {
-            const response = axiosInstance.get("/authentication/user");
+            const response = await axiosInstance.get("/authentication/user");
             set({authenticatedUser: response.data});
         } catch (err) {
             console.log("An error occurred while checking user authentication: ", err);
