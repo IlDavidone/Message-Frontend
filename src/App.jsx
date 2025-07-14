@@ -1,12 +1,15 @@
-import React from 'react'
+import React from "react";
 import { useState, useEffect } from "react";
-import LoginPage from './pages/LoginPage';
+import Loginpage from "./pages/Loginpage";
+import Registerpage from "./pages/Registerpage";
+import Homepage from "./pages/Homepage";
 import { Routes, Route, Navigate } from "react-router-dom";
 
-import { authenticationStates } from './states/authenticationState'; 
+import { authenticationStates } from "./states/authenticationState";
 
 const App = () => {
-  const { authenticatedUser, isCheckingAuthentication, authenticationCheck } = authenticationStates();
+  const { authenticatedUser, isCheckingAuthentication, authenticationCheck } =
+    authenticationStates();
 
   useEffect(() => {
     authenticationCheck();
@@ -16,10 +19,20 @@ const App = () => {
 
   return (
     <Routes>
-      <Route path="/" element={authenticatedUser ? <Homepage /> : <Navigate to="/login" />} />
-      <Route path="/login" element={authenticatedUser ? <Navigate to="/" /> : <LoginPage />} />
+      <Route
+        path="/"
+        element={authenticatedUser ? <Homepage /> : <Navigate to="/login" />}
+      />
+      <Route
+        path="/login"
+        element={authenticatedUser ? <Navigate to="/" /> : <Loginpage />}
+      />
+      <Route
+        path="/register"
+        element={authenticatedUser ? <Navigate to="/" /> : <Registerpage />}
+      />
     </Routes>
-  )
-}
+  );
+};
 
-export default App
+export default App;
