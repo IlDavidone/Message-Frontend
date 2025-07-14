@@ -1,6 +1,7 @@
 import React from "react";
 import { authenticationStates } from "../states/authenticationState";
 import { useState, useEffect } from "react";
+import ChatroomSidebar from "../components/chatroomSidebar";
 import { Link } from "react-router-dom";
 
 const Homepage = () => {
@@ -13,9 +14,7 @@ const Homepage = () => {
 
   return (
     <div>
-        <p>{authenticatedUser.username}</p>
-      <p>{authenticatedUser.user.username}</p>
-      <p>{authenticatedUser.user.email}</p>
+      <ChatroomSidebar />
       <button onClick={logoutHandler}>Logout</button>
     </div>
   );
