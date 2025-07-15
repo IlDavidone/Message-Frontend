@@ -20,6 +20,7 @@ export const channelState = create((set, get) => ({
     setCurrentChannel: (channelName) => {
         set({
             selectedChannel: channelName,
-        })
+        });
+        console.log(get().selectedChannel)
     }
 }));
