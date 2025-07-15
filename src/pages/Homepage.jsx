@@ -13,7 +13,7 @@ const Homepage = () => {
     }
 
   return (
-    <div>
+    <div className="flex">
       <ChatroomSidebar />
       <button onClick={logoutHandler}>Logout</button>
     </div>
