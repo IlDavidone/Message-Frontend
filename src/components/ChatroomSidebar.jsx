@@ -2,12 +2,20 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { chatroomsState } from "../states/chatroomsState";
+import { channelState } from "../states/channelState";
 import { Plus } from "lucide-react";
 import ChatroomsLoading from "./placeholders/ChatroomsLoading";
 
 const ChatroomSidebar = () => {
-  const { areChatroomsLoading, fetchChatrooms, clearChatrooms, chatrooms } =
-    chatroomsState();
+  const {
+    areChatroomsLoading,
+    fetchChatrooms,
+    clearChatrooms,
+    chatrooms,
+    setSelectedChatroom,
+    selectedChatroom,
+  } = chatroomsState();
+  const { fetchCurrentChatroomChannels } = channelState();
   const [hasRan, setHasRan] = useState(false);
 
   useEffect(() => {
@@ -19,14 +27,24 @@ const ChatroomSidebar = () => {
     }
   }, []);
 
-  console.log(chatrooms);
+  useEffect(() => {
+    fetchCurrentChatroomChannels(selectedChatroom);
+  }, [selectedChatroom, fetchCurrentChatroomChannels]);
+
+  const selectChatroom = (id) => {
+    setSelectedChatroom(id);
+  };
 
   if (areChatroomsLoading == true) {
-    return <ChatroomsLoading />
+    return <ChatroomsLoading />;
   }
 
   const mappedChatrooms = chatrooms.map((chatroom) => (
-    <div key={chatroom._id} className="p-1 flex items-center gap-4">
+    <div
+      onClick={() => selectChatroom(chatroom._id)}
+      key={chatroom._id}
+      className="p-1 flex items-center gap-4"
+    >
       <img
         key={chatroom.image}
         src={chatroom.image}
@@ -41,7 +59,7 @@ const ChatroomSidebar = () => {
   ));
 
   return (
-    <div className="flex flex-col gap-1.5 items-center pt-1 h-screen w-16 bg-zinc-800">
+    <div className="flex flex-col border-r-1 border-r-zinc-700 gap-1.5 items-center pt-1 h-screen w-16 bg-zinc-800">
       {mappedChatrooms}
       <div className="flex items-center">
         <div className="peer flex justify-center items-center bg-slate-800 h-12 w-12 rounded-full hover:bg-slate-700 transition duration-150 active:scale-95">

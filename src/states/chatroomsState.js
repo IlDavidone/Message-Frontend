@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
-import axios from "axios";
 import { axiosInstance } from "../lib/axios";
 import toast from "react-hot-toast";
 import { create } from "zustand";
 
 export const chatroomsState = create((set, get) => ({
   areChatroomsLoading: true,
+  selectedChatroom: "",
+  selectedChatroomInformations: [],
   chatrooms: [],
 
   fetchChatrooms: async () => {
@@ -18,4 +19,18 @@ export const chatroomsState = create((set, get) => ({
       areChatroomsLoading: false,
     });
   },
+
+  fetchChatroomInformations: async (id) => {
+    const response = await axiosInstance.get(`/chatroom/info/${id}`);
+    set({
+      selectedChatroomInformations: response.data,
+    });
+  },
+
+  setSelectedChatroom: (id) => {
+    set({
+      selectedChatroom: id,
+    })
+    console.log(get().selectedChatroom);
+  }
 }));

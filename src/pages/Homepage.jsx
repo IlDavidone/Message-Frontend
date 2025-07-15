@@ -1,7 +1,7 @@
 import React from "react";
 import { authenticationStates } from "../states/authenticationState";
 import { useState, useEffect } from "react";
-import ChatroomSidebar from "../components/chatroomSidebar";
+import Sidebar from "../components/Sidebar";
 import { Link } from "react-router-dom";
 
 const Homepage = () => {
@@ -14,8 +14,7 @@ const Homepage = () => {
 
   return (
     <div className="flex">
-      <ChatroomSidebar />
-      <button onClick={logoutHandler}>Logout</button>
+      <Sidebar />
     </div>
   );
 };
