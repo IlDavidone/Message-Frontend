@@ -3,6 +3,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { chatroomsState } from "../states/chatroomsState";
 import { Plus } from "lucide-react";
+import ChatroomsLoading from "./placeholders/ChatroomsLoading";
 
 const ChatroomSidebar = () => {
   const { areChatroomsLoading, fetchChatrooms, clearChatrooms, chatrooms } =
@@ -20,6 +21,10 @@ const ChatroomSidebar = () => {
 
   console.log(chatrooms);
 
+  if (areChatroomsLoading == true) {
+    return <ChatroomsLoading />
+  }
+
   const mappedChatrooms = chatrooms.map((chatroom) => (
     <div key={chatroom._id} className="p-1 flex items-center gap-4">
       <img
@@ -36,7 +41,7 @@ const ChatroomSidebar = () => {
   ));
 
   return (
-    <div className="flex flex-col gap-1 items-center pt-1 h-screen w-16 bg-zinc-800">
+    <div className="flex flex-col gap-1.5 items-center pt-1 h-screen w-16 bg-zinc-800">
       {mappedChatrooms}
       <div className="flex items-center">
         <div className="peer flex justify-center items-center bg-slate-800 h-12 w-12 rounded-full hover:bg-slate-700 transition duration-150 active:scale-95">

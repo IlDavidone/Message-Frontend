@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+@theme {
+  --animate-chatrooms-loading: chatrooms-loading 1s infinite alternate;
+
+  @keyframes chatrooms-loading {
+    0% {
+      background-color: #3b3b3b;
+    }
+    100% {
+      background-color: #2e2e2e;
+    }
+  }
+}

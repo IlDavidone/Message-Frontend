@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { create } from "zustand";
 
 export const chatroomsState = create((set, get) => ({
-  areChatroomsLoading: false,
+  areChatroomsLoading: true,
   chatrooms: [],
 
   fetchChatrooms: async () => {
@@ -13,6 +13,9 @@ export const chatroomsState = create((set, get) => ({
     const responseData = response.data;
     set({
       chatrooms: responseData,
+    });
+    set({
+      areChatroomsLoading: false,
     });
   },
 }));
